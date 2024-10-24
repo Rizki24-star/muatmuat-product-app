@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import "./App.css";
+import HomePage from "./pages/HomePage";
+import MainLayout from "./layouts/MainLayout";
+import AddProductPage from "./pages/AddProduct";
+import PokemonPage from "./pages/Pokemon";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "add",
+        element: <AddProductPage />,
+      },
+      {
+        path: "pokemon",
+        element: <PokemonPage />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
